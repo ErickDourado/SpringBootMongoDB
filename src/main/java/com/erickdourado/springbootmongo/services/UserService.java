@@ -35,9 +35,19 @@ public class UserService {
 		repository.deleteById(id);
 	}
 	
+	public User update(User user) {
+		User newUser = findById(user.getId());//pegando o user antigo pelo id pra dps atualizar.
+		updateData(newUser, user);
+		return repository.save(newUser);
+	}
+	
 	public User fromDTO(UserDTO dto) {
 		//método criado para transformar UserDTO em User
 		return new User(dto.getId(), dto.getName(), dto.getEmail());
 	}
 	
+	public void updateData(User antigo, User novo) {
+		antigo.setName(novo.getName());
+		antigo.setEmail(novo.getEmail());
+	}
 }
