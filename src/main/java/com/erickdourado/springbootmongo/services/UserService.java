@@ -30,7 +30,13 @@ public class UserService {
 		return repository.insert(user);
 	}
 	
+	public void delete(String id) {
+		findById(id); //Só pra ver se acha, se não achar lança exception.
+		repository.deleteById(id);
+	}
+	
 	public User fromDTO(UserDTO dto) {
+		//método criado para transformar UserDTO em User
 		return new User(dto.getId(), dto.getName(), dto.getEmail());
 	}
 	
